@@ -337,7 +337,7 @@ public class JPConexion extends JPanel implements ActionListener {
 		}
 	}
 	
-	public boolean vatidaTextosVaciosConexion () {
+	public boolean vatidaTextosVaciosConexion () { 
 		boolean vacio =false;
 		if((textUser.getText() == null || textUser.getText() .isEmpty()) &&
 		   (textPassword.getText() == null || textPassword.getText() .isEmpty())	&&
