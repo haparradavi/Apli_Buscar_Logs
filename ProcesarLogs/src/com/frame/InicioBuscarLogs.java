@@ -102,8 +102,8 @@ public class InicioBuscarLogs {
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		frmBusquedaLogs.getContentPane().add(tabbedPane, BorderLayout.CENTER);
 
-//		jpconexion =new JPConexion(tabbedPane);
-		conexion();
+		jpconexion =new JPConexion(tabbedPane);
+//		conexion();
 //		jpBusqueda =new JPBusqueda(tabbedPane);
 
 		JPanel jpbusquedaparametrica = new Imagenes();
@@ -202,7 +202,7 @@ public class InicioBuscarLogs {
 		grupoButtonFabrica.add(rdbtnIBM);
 
 		/*********************************************/
-		JPanel jpconexion_1 = new Imagenes();
+/*		JPanel jpconexion_1 = new Imagenes();
 		tabbedPane.addTab("conexion", null, jpconexion_1, null);
 
 		jpconexion_1.setLayout(null);
@@ -312,7 +312,7 @@ public class InicioBuscarLogs {
 		grupoButton.add(rdbtnProduccion);
 		grupoButton.add(rdbtnLaboratorio);
 		grupoButton.add(rdbtnDesarrollo);
-		/*********************************************/
+*/		/*********************************************/
 	}
 
 	public void conexion() {

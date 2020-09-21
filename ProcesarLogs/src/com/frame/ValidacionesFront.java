@@ -3,43 +3,58 @@ package com.frame;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
+import com.ConectionSSH.ConexionAmbiente;
+import com.ProcesarProperties.LeerArchivoProperties;
+import com.ProcesarProperties.PropertiesDao;
+import com.procesarlogs.ParametrosLogsDAO;
+
 public class ValidacionesFront {
-	
-	public void procesoespera(int metodoEjecucion){
+	static boolean errorprocesoespera=false;
+	public static boolean procesoespera(int metodoEjecucion,int ambiente) throws Exception{
 		
 		JOptionPane msg= Mensajes.mensajeInformativoParametrico("Se esta ejecutando el proceso por favor espere");
-
-		final JDialog dlg = msg.createDialog("Procesando...");
-		dlg.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
-		dlg.disable();
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				try {
-//					Thread.sleep(5000);
-					switch (metodoEjecucion) {
-					case 1:
-						procesoTimer ();
-						break;
-					case 2:
-						
-						break;
-					case 3:
-						
-						break;	
-
-					default:
-						break;
+		try {
+			final JDialog dlg = msg.createDialog("Procesando...");
+			dlg.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+			dlg.disable();
+			new Thread(new Runnable() {
+				public void run(){
+					try {
+	//					Thread.sleep(5000);
+						switch (metodoEjecucion) {
+						case 1:
+					//		procesoTimer ();
+							break;
+						case 2:
+							ConexionAmbiente conecAmb = new ConexionAmbiente();
+							conecAmb.conexion(ambiente);
+							break;
+						case 3:
+							
+							break;	
+	
+						default:
+							break;
+						}
+	
+					} catch (Exception e) {
+						errorprocesoespera=true;
+						Mensajes.mensajeError("ValidacionesFront: "+e.getMessage());
+						System.out.println("aqui hubo error");
 					}
-
-				} catch (Exception e) {
-					e.printStackTrace();
+					dlg.setVisible(false);
 				}
-				dlg.setVisible(false);
-			}
-		}).start();
-		dlg.setVisible(true);
-		dlg.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			}).start();
+			
+			dlg.setVisible(true);
+			dlg.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		
+		} catch (Exception e) {
+			errorprocesoespera=true;
+			System.out.println("procesoespera"+e.getMessage());   
+			throw e;
+		}
+		return errorprocesoespera;
 		
 	}
 	
@@ -51,5 +66,6 @@ public class ValidacionesFront {
 			continue;
 		System.out.println("fin");
 	}
+
 
 }

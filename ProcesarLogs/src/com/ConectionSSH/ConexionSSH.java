@@ -23,6 +23,8 @@ public class ConexionSSH {
 	public void connect(String username, String host, String password, int port)
 			throws JSchException, IllegalAccessException, IOException, SftpException {
 
+		try {
+
 		if (Globalvar.sessionGlobal == null || !Globalvar.sessionGlobal.isConnected()) {
 		} else {
 			Globalvar.sessionGlobal.disconnect();
@@ -34,6 +36,12 @@ public class ConexionSSH {
 			Globalvar.sessionGlobal.setConfig("StrictHostKeyChecking", "no");
 			Globalvar.sessionGlobal.connect(60000);
 			System.out.println("conexion exitosa");
+			
+			
+		} catch (Exception e) {
+			System.out.println("connec:"+e.getMessage());
+			throw e;
+		}	
 
 			//addFile(this.filePath);
 

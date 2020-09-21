@@ -63,7 +63,7 @@ public class PruebaBusquedaParametrica {
 	    
 	    System.out.println(parametrosLogsDAO.getResultBusquedaLog());
 	    
-		} catch (IllegalAccessException | JSchException | IOException | SftpException |InterruptedException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			System.out.println("Error frontPersistemcePBusquedaParametrica: "+e.getMessage());
 			e.printStackTrace();
