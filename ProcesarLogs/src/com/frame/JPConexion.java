@@ -14,6 +14,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import com.ProcesarProperties.LeerArchivoProperties;
 import com.ProcesarProperties.PropertiesDao;
+import com.procesarlogs.ParametrosLogsDAO;
 
 
 public class JPConexion extends JPanel implements ActionListener {
@@ -36,6 +37,7 @@ public class JPConexion extends JPanel implements ActionListener {
 	private LeerArchivoProperties leer;
 	private PropertiesDao propertiesDao ;
 	private int tipoAmbiente=0;
+	private ParametrosLogsDAO parametrosLogsDAO  =new ParametrosLogsDAO();
 
 	private static final long serialVersionUID = 497736894875774303L;
 
@@ -219,9 +221,9 @@ public class JPConexion extends JPanel implements ActionListener {
 			else {
 				if(conexionambiente(tipoAmbiente)) {
 		        	  Mensajes.mensajeError("No se puedo establecer conexión");
-		        	  tipoAmbiente=0;
+//		        	  tipoAmbiente=0;
 				} else {
-		        	  Mensajes.mensajeError("Conexión Exitosa");
+		        	  Mensajes.mensajeInformativo("Conexión Exitosa");
 		        	  InicioBuscarLogs.jpBusqueda.recibirAmbienteConexion(tipoAmbiente); 
 		          }  
 			}
@@ -342,7 +344,7 @@ public class JPConexion extends JPanel implements ActionListener {
 	public boolean conexionambiente(int ambiente) {
 		boolean validaconexionambiente=false;
 		try {
-          if(ValidacionesFront.procesoespera(2, ambiente))
+          if(ValidacionesFront.procesoespera(2, ambiente,parametrosLogsDAO))
         	  validaconexionambiente=true;
         	  
 		} catch (Exception e) {

@@ -6,7 +6,7 @@ import java.io.InputStream;
 public class ParametrosLogsDAO {
 	
 	private String nombreServicio;
-	private int ambienteFabrica;
+	private int ambienteFabrica =0;
 	private String idtransaccion;
 	private int tipoProcesoLog;
 	private String canal;

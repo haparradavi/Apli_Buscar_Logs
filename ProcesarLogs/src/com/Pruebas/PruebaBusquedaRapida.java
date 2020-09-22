@@ -27,6 +27,7 @@ public class PruebaBusquedaRapida {
         
 		
 		try {
+			System.out.println("Entra");
 			conecAmb.conexion(2);
 			parametrosLogsDAO.setAmbienteFabrica(1);	
 			

@@ -71,7 +71,7 @@ public class PBusquedaRapida {
 			trazaLog=conexionSSH.eliminarrutalog(trazaLog);
 			parametrosLogsDAO.setResultBusquedaLog(trazaLog);
 			parametrosLogsDAO.setResultBusquedaError(errortraza);
-			Globalvar.sessionGlobal.disconnect();
+//			Globalvar.sessionGlobal.disconnect();
 			
 	        } catch (JSchException | IOException ee) {
 //	          System.out.println(ee);

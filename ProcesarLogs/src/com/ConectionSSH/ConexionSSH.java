@@ -26,10 +26,7 @@ public class ConexionSSH {
 		try {
 
 		if (Globalvar.sessionGlobal == null || !Globalvar.sessionGlobal.isConnected()) {
-		} else {
-			Globalvar.sessionGlobal.disconnect();
-			//throw new IllegalAccessException("Sesion SFTP ya iniciada.");
-		}
+			
 			JSch jsch = new JSch();
 			Globalvar.setSessionGlobal(jsch.getSession(username, host, port));
 			Globalvar.sessionGlobal.setPassword(password);
@@ -37,6 +34,11 @@ public class ConexionSSH {
 			Globalvar.sessionGlobal.connect(60000);
 			System.out.println("conexion exitosa");
 			
+		} else {
+			Globalvar.sessionGlobal.disconnect();
+			//throw new IllegalAccessException("Sesion SFTP ya iniciada.");
+		}
+
 			
 		} catch (Exception e) {
 			System.out.println("connec:"+e.getMessage());
@@ -132,7 +134,7 @@ public class ConexionSSH {
 	public  String execCommanLinux (String comando)throws Exception{
 		String namelog="";
 		try {
-		System.out.println("comando: "+comando);
+//		System.out.println("comando: "+comando);
 		ConexionSSH conSh = new ConexionSSH();
 		namelog=conSh.executeCommand(comando);
 		} catch (JSchException | IOException | InterruptedException e) {

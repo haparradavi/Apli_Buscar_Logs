@@ -16,6 +16,10 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import com.Globales.Globalvar;
+import com.Persistence.PBusquedaRapida;
+import com.Persistence.PObtenerRutasYNombreLogs;
+import com.Properties.Constantes;
 import com.procesarlogs.ParametrosLogsDAO;
 
 public class JPBusqueda extends JFrame implements ActionListener {
@@ -31,8 +35,8 @@ public class JPBusqueda extends JFrame implements ActionListener {
 	private JScrollPane jscrollPane = null;
 	private JTextArea textAreaLogs;
 	private JTextArea textAreaError ;
-	private int tipoAmbiente;
-	private ParametrosLogsDAO parametrosLogsDAO;
+	private int tipoAmbiente =0;
+	private ParametrosLogsDAO parametrosLogsDAO  =new ParametrosLogsDAO();
  
 	private static final long serialVersionUID = -5704905176070654585L;
 
@@ -156,6 +160,7 @@ public class JPBusqueda extends JFrame implements ActionListener {
 	public  void recibirAmbienteConexion (int ambienteconexion) {
 		System.out.println("llego al panel bisqueda dato: "+ambienteconexion);
 		tipoAmbiente=ambienteconexion;
+		
 //		JPanel jpbusquedarapida = new JPanel();
 //		InicioBuscarLogs.tabbedPane.addTab("Busqueda", null, jpbusquedarapida, null);
 //		jpbusquedarapida.setLayout(null);
@@ -176,11 +181,105 @@ public class JPBusqueda extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-		if (e.getSource() == rdbtnIBM)
+		if (e.getSource() == rdbtnIBM) {
 			parametrosLogsDAO.setAmbienteFabrica(1);
-		if (e.getSource() == rdbtnTcs)
-			parametrosLogsDAO.setAmbienteFabrica(2);
+			System.out.println("vaos1");
+		}
 		
+		if (e.getSource() == rdbtnTcs) {			
+			parametrosLogsDAO.setAmbienteFabrica(2);
+			System.out.println("vaos2");
+		}
+		
+		if (e.getSource() == btnBuscar) {	
+
+			evaluarBuscar ();
+		}
+	}
+	
+	
+	public void  evaluarBuscar () {
+		
+		try {
+			if(tipoAmbiente==0) {
+				Mensajes.mensajeError("Debe generar conexión con alguno de los 3 ambientes para realizar el proceso.");
+			}else if(parametrosLogsDAO.getAmbienteFabrica()==0) {
+				Mensajes.mensajeError("Debe seleccionar una fabrica para buscar la traza en los logs.");
+			}else if(Validarnuloscampos()) {
+				Mensajes.mensajeError("Debe ingresar al menos un criterio de busqueda");
+			}else {
+				PObtenerRutasYNombreLogs persisobtenerRutasYNombreLogs=new PObtenerRutasYNombreLogs();
+				PBusquedaRapida persisBusqueda= new PBusquedaRapida();
+				parametrosLogsDAO=persisobtenerRutasYNombreLogs.persistenceObtenerRutasYNombreLogs(parametrosLogsDAO);
+				
+				parametrosLogsDAO.setNombreServicio(textNombreServicio.getText());
+				parametrosLogsDAO.setFechatransaccion(textFechaTransaccion.getText());
+				parametrosLogsDAO.setIdtransaccion(textIdTransaccion.getText());
+				
+				System.out.println("Ruta archivo: "+parametrosLogsDAO.getRutaTraza());
+				System.out.println(" Nombre Log: "+parametrosLogsDAO.getNameLogcommand());
+				System.out.println("Ruta Error: "+parametrosLogsDAO.getRutaErrorlog());
+				System.out.println(" Nombre Log Error: "+parametrosLogsDAO.getNameErrorcommand());
+				
+				if(!ValidacionesFront.procesoespera(3, 0,parametrosLogsDAO)) {
+				
+//					parametrosLogsDAO =persisBusqueda.PersistencePBusquedaRapida(parametrosLogsDAO);
+					parametrosLogsDAO=ValidacionesFront.parametrosLogsDAO1;
+					parametrosLogsDAO = validacionnull(parametrosLogsDAO);
+					
+					textAreaLogs.setText(parametrosLogsDAO.getResultBusquedaLog());
+					textAreaError.setText(parametrosLogsDAO.getResultBusquedaError());
+					textIdTransaccion.setText(parametrosLogsDAO.getIdtransaccion());
+//					
+//					System.out.println("result log: "+parametrosLogsDAO.getResultBusquedaLog());
+//					System.out.println("result error: "+parametrosLogsDAO.getResultBusquedaError());
+//					System.out.println("result idtransaccion "+parametrosLogsDAO.getIdtransaccion());
+					
+				}else
+					Mensajes.mensajeError("Error al generar la busqueda de la traza");
+			}
+		} catch (Exception e) {
+			
+			// TODO Auto-generated catch block
+			System.out.println("Error evaluarBuscar: "+e.getMessage());
+			Mensajes.mensajeError("evaluarBuscar"+e.getMessage());
+		}
+
+		
+	}
+	
+	public boolean Validarnuloscampos() {
+		boolean evaluar=false;
+		try {
+			if((textNombreServicio.getText() ==null || textNombreServicio.getText().isEmpty())&&
+			   (textFechaTransaccion.getText() ==null || textFechaTransaccion.getText().isEmpty())&&
+			   (textIdTransaccion.getText()==null || textIdTransaccion.getText().isEmpty())	) {
+				evaluar=true;
+			}
+							
+		} catch (Exception e) {
+			Mensajes.mensajeError("Validarnuloscampos: "+e.getMessage());
+		}
+		return evaluar;
+	}
+	
+	public  ParametrosLogsDAO validacionnull(ParametrosLogsDAO parametrosLogsDAO) throws Exception{
+		try {
+			if(parametrosLogsDAO.getResultBusquedaLog() == null || parametrosLogsDAO.getResultBusquedaLog() .isEmpty()) {
+				parametrosLogsDAO.setResultBusquedaLog(Constantes.MsgResultTrazaLog);
+				}
+			if(parametrosLogsDAO.getResultBusquedaError() == null || parametrosLogsDAO.getResultBusquedaError().isEmpty()) { 
+				parametrosLogsDAO.setResultBusquedaError(Constantes.MsgResultError);
+			}
+			if(parametrosLogsDAO.getIdtransaccion()  == null || parametrosLogsDAO.getIdtransaccion().isEmpty()) { 
+				parametrosLogsDAO.setIdtransaccion(Constantes.MsgIdTransaccion);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			System.out.println("Error validacionnull: "+e.getMessage());
+			throw e;
+		}		
+		return parametrosLogsDAO;
 	}
 
 }
