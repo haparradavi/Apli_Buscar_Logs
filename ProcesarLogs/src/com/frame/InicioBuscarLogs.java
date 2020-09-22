@@ -104,8 +104,8 @@ public class InicioBuscarLogs {
 
 		jpconexion =new JPConexion(tabbedPane);
 //		conexion();
-//		jpBusqueda =new JPBusqueda(tabbedPane);
-
+		jpBusqueda =new JPBusqueda(tabbedPane);
+/*
 		JPanel jpbusquedaparametrica = new Imagenes();
 		tabbedPane.addTab("Busqueda", null, jpbusquedaparametrica, null);
 		jpbusquedaparametrica.setLayout(null);
@@ -200,7 +200,7 @@ public class InicioBuscarLogs {
 		ButtonGroup grupoButtonFabrica = new ButtonGroup();
 		grupoButtonFabrica.add(rdbtnTcs);
 		grupoButtonFabrica.add(rdbtnIBM);
-
+*/
 		/*********************************************/
 /*		JPanel jpconexion_1 = new Imagenes();
 		tabbedPane.addTab("conexion", null, jpconexion_1, null);

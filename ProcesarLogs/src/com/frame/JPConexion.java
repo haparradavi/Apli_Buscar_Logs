@@ -1,38 +1,23 @@
 package com.frame;
 
 import java.awt.Dimension;
-import java.awt.FileDialog;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
-
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JFileChooser;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JProgressBar;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-
-import com.ConectionSSH.ConexionAmbiente;
 import com.ProcesarProperties.LeerArchivoProperties;
 import com.ProcesarProperties.PropertiesDao;
-import com.jcraft.jsch.JSchException;
-import com.jcraft.jsch.SftpException;
-import com.procesarlogs.ParametrosLogsDAO;
+
 
 public class JPConexion extends JPanel implements ActionListener {
 
-	private JTextField textField;
-	private JButton btnNewButton;
 	private JScrollPane jscrollPane = null;
 	private JTextField textUser;
 	public JButton btnConectar;
@@ -161,6 +146,7 @@ public class JPConexion extends JPanel implements ActionListener {
 		grupoButton.add(rdbtnProduccion);
 		grupoButton.add(rdbtnLaboratorio);
 		grupoButton.add(rdbtnDesarrollo);
+		
 		//1200, 897
 		jpconexion.setPreferredSize(new Dimension( 1130, 615));
 		
@@ -227,16 +213,21 @@ public class JPConexion extends JPanel implements ActionListener {
 		}	
 		
 		if (e.getSource() == btnConectar) {
+//			 InicioBuscarLogs.jpBusqueda.recibirAmbienteConexion(tipoAmbiente); 
 			if(tipoAmbiente==0)
 				Mensajes.mensajeError("Debe seleccionar un ambiente para conectarse.");
 			else {
-				conexionambiente(tipoAmbiente);
+				if(conexionambiente(tipoAmbiente)) {
+		        	  Mensajes.mensajeError("No se puedo establecer conexión");
+		        	  tipoAmbiente=0;
+				} else {
+		        	  Mensajes.mensajeError("Conexión Exitosa");
+		        	  InicioBuscarLogs.jpBusqueda.recibirAmbienteConexion(tipoAmbiente); 
+		          }  
 			}
 				
 		}
-		
-		
-		
+
 	}
 	
 //	ValidacionesFront validacion = new ValidacionesFront();
@@ -304,7 +295,6 @@ public class JPConexion extends JPanel implements ActionListener {
 	}
 	
 	public void modificardatosconexion() {
-		boolean numeric =false;
 		try {
 			
 			switch (tipoAmbiente) {
@@ -349,17 +339,17 @@ public class JPConexion extends JPanel implements ActionListener {
 		return vacio;
 	}
 	
-	public void conexionambiente(int ambiente) {
+	public boolean conexionambiente(int ambiente) {
+		boolean validaconexionambiente=false;
 		try {
           if(ValidacionesFront.procesoespera(2, ambiente))
-        	  Mensajes.mensajeError("No se puedo establecer conexión");
-          else
-        	  Mensajes.mensajeError("Conexión Exitosa");
+        	  validaconexionambiente=true;
         	  
 		} catch (Exception e) {
 			System.out.println("conexionambiente "+e.getMessage());
 			Mensajes.mensajeError("conexionambiente: "+e.getMessage());
 		}
+		return validaconexionambiente;
 	}
 	
 	
