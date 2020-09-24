@@ -11,6 +11,7 @@ import javax.swing.UIManager;
 
 import com.Globales.Globalvar;
 import com.jtattoo.plaf.acryl.AcrylLookAndFeel;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.net.URL;
@@ -70,8 +71,10 @@ public class InicioBuscarLogs {
 
 		frmBusquedaLogs.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent evt) {
-				System.out.println("valida");
-				Globalvar.sessionGlobal.disconnect();
+				
+				if (Globalvar.sessionGlobal != null && Globalvar.sessionGlobal.isConnected()) {
+					Globalvar.sessionGlobal.disconnect();
+				}
 				System.exit(0);
 			}
 		});

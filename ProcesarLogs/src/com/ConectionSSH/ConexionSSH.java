@@ -25,7 +25,9 @@ public class ConexionSSH {
 
 		try {
 
-		if (Globalvar.sessionGlobal == null || !Globalvar.sessionGlobal.isConnected()) {
+			if (Globalvar.sessionGlobal != null && Globalvar.sessionGlobal.isConnected()) {
+				Globalvar.sessionGlobal.disconnect();
+			}
 			
 			JSch jsch = new JSch();
 			Globalvar.setSessionGlobal(jsch.getSession(username, host, port));
@@ -34,11 +36,6 @@ public class ConexionSSH {
 			Globalvar.sessionGlobal.connect(60000);
 			System.out.println("conexion exitosa");
 			
-		} else {
-			Globalvar.sessionGlobal.disconnect();
-			//throw new IllegalAccessException("Sesion SFTP ya iniciada.");
-		}
-
 			
 		} catch (Exception e) {
 			System.out.println("connec:"+e.getMessage());

@@ -54,7 +54,7 @@ public class GetRutaYNombresTraza {
 		
 		} catch (JSchException| IOException | SftpException |InterruptedException  e) {
 			// TODO Auto-generated catch block
-			System.out.println("Error frontPersistemcePBusquedaRapida: "+e.getMessage());
+			System.out.println("Error getRutaLogs: "+e.getMessage());
 			throw e;
 		}	
 		

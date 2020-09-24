@@ -41,7 +41,9 @@ public class PBusquedaRapida {
 						String[] parts = lineService.split(",");
 						parametrosLogsDAO.setIdtransaccion(parts[1]);
 					}else {
-						parametrosLogsDAO =  mstringAXml.stringAXml(lineService,parametrosLogsDAO);
+						String linea=conexionSSH.eliminarrutalog(lineService);
+						parametrosLogsDAO =  mstringAXml.stringAXml(linea,parametrosLogsDAO);
+//						parametrosLogsDAO =  mstringAXml.stringAXml(lineService,parametrosLogsDAO);
 					}
 
 					long start = System.currentTimeMillis();
