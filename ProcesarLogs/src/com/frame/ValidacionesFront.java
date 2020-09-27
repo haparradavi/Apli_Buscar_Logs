@@ -5,8 +5,7 @@ import javax.swing.JOptionPane;
 
 import com.ConectionSSH.ConexionAmbiente;
 import com.Persistence.PBusquedaRapida;
-import com.ProcesarProperties.LeerArchivoProperties;
-import com.ProcesarProperties.PropertiesDao;
+import com.procesarlogs.BuscarErrorSyslog;
 import com.procesarlogs.ParametrosLogsDAO;
 
 public class ValidacionesFront {
@@ -18,7 +17,7 @@ public class ValidacionesFront {
 	
 	public static boolean procesoespera(int metodoEjecucion,int ambiente,ParametrosLogsDAO parametrosLogsDAO) throws Exception{
 		errorprocesoespera=false;
-		parametrosLogsDAO1 =null;
+		parametrosLogsDAO1 =new ParametrosLogsDAO();
 		JOptionPane msg= Mensajes.mensajeInformativoParametrico("Se esta ejecutando el proceso por favor espere");
 		try {
 			final JDialog dlg = msg.createDialog("Procesando...");
@@ -39,7 +38,9 @@ public class ValidacionesFront {
 						case 3:
 							PBusquedaRapida persisBusqueda= new PBusquedaRapida();
 							parametrosLogsDAO1 =persisBusqueda.PersistencePBusquedaRapida(parametrosLogsDAO);
-							
+						case 4:
+							BuscarErrorSyslog buscarsyslog = new BuscarErrorSyslog();
+							parametrosLogsDAO1=buscarsyslog.procesarSyslog(parametrosLogsDAO);
 							break;	
 	
 						default:

@@ -25,7 +25,8 @@ public class ParametrosLogsDAO {
 	private String fechatransaccion =null;
 	private String resultBusquedaLog =null;
 	private String resultBusquedaError =null;
-	
+	private StringBuilder resultErrorSyslog =null;
+	private int segundosProceso;
 	
 	public String getNombreServicio() {
 		return nombreServicio;
@@ -148,7 +149,18 @@ public class ParametrosLogsDAO {
 	public void setResultBusquedaError(String resultBusquedaError) {
 		this.resultBusquedaError = resultBusquedaError;
 	}
-	
+	public StringBuilder getResultErrorSyslog() {
+		return resultErrorSyslog;
+	}
+	public void setResultErrorSyslog(StringBuilder resultErrorSyslog) {
+		this.resultErrorSyslog = resultErrorSyslog;
+	}
+	public int getSegundosProceso() {
+		return segundosProceso;
+	}
+	public void setSegundosProceso(int segundosProceso) {
+		this.segundosProceso = segundosProceso;
+	}
 	
 
 }

@@ -52,17 +52,19 @@ public class JPConexion extends JPanel implements ActionListener {
 		jpconexion.setLayout(null);
 		JLabel lblUser = new JLabel("User: ");
 		lblUser.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblUser.setBounds(651, 391, 80, 14);
+		lblUser.setBounds(738, 386, 80, 14);
 		jpconexion.add(lblUser);
 
 		textUser = new JTextField();
-		textUser.setBounds(743, 389, 163, 20);
+		textUser.setBounds(437, 385, 163, 20);
+		textUser.setVisible(false);
 		jpconexion.add(textUser);
 		textUser.setColumns(10);
+		
 
 		btnConectar = new JButton("Conectar");
 		btnConectar.setFont(new Font("Dialog", Font.BOLD, 15));
-		btnConectar.setBounds(794, 590, 100, 23);
+		btnConectar.setBounds(848, 592, 100, 23);
 		jpconexion.add(btnConectar);
 
 		JLabel lblConexionSsh = new JLabel("Conexi\u00F3n SSH");
@@ -72,61 +74,67 @@ public class JPConexion extends JPanel implements ActionListener {
 
 		JLabel lblPassword = new JLabel("Password:");
 		lblPassword.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblPassword.setBounds(651, 436, 80, 14);
+		lblPassword.setBounds(738, 431, 80, 14);
 		jpconexion.add(lblPassword);
 
 		textPassword = new JTextField();
 		textPassword.setColumns(10);
-		textPassword.setBounds(743, 434, 163, 20);
+		textPassword.setBounds(437, 435, 163, 20);
+		textPassword.setVisible(false);
 		jpconexion.add(textPassword);
+		
 
 		JLabel lblHost = new JLabel("Host:");
 		lblHost.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblHost.setBounds(651, 483, 80, 14);
+		lblHost.setBounds(738, 478, 80, 14);
 		jpconexion.add(lblHost);
 
 		textHost = new JTextField();
 		textHost.setColumns(10);
-		textHost.setBounds(743, 481, 163, 20);
+		textHost.setBounds(437, 482, 163, 20);
+		textHost.setVisible(false);
 		jpconexion.add(textHost);
+		
 
 		textMostrarUser = new JTextField();
 		textMostrarUser.setEditable(false);
 		textMostrarUser.setColumns(10);
-		textMostrarUser.setBounds(949, 389, 163, 20);
+		textMostrarUser.setBounds(828, 385, 163, 20);
 		jpconexion.add(textMostrarUser);
 
 		textMostrarPassword = new JTextField();
 		textMostrarPassword.setEditable(false);
 		textMostrarPassword.setColumns(10);
-		textMostrarPassword.setBounds(949, 434, 163, 20);
+		textMostrarPassword.setBounds(828, 430, 163, 20);
 		jpconexion.add(textMostrarPassword);
 
 		textMostrarHost = new JTextField();
 		textMostrarHost.setEditable(false);
 		textMostrarHost.setColumns(10);
-		textMostrarHost.setBounds(949, 481, 163, 20);
+		textMostrarHost.setBounds(828, 477, 163, 20);
 		jpconexion.add(textMostrarHost);
 
 		JLabel lblPort = new JLabel("Port:");
 		lblPort.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblPort.setBounds(651, 529, 80, 14);
+		lblPort.setBounds(738, 524, 80, 14);
 		jpconexion.add(lblPort);
 
 		textPort = new JTextField();
 		textPort.setColumns(10);
-		textPort.setBounds(743, 527, 163, 20);
+		textPort.setBounds(437, 523, 163, 20);
+		textPort.setVisible(false);
 		jpconexion.add(textPort);
 
 		textMostrarPort = new JTextField();
 		textMostrarPort.setEditable(false);
 		textMostrarPort.setColumns(10);
-		textMostrarPort.setBounds(949, 527, 163, 20);
+		textMostrarPort.setBounds(828, 523, 163, 20);
 		jpconexion.add(textMostrarPort);
 
 		btnModificar = new JButton("Modificar");
 		btnModificar.setFont(new Font("Dialog", Font.BOLD, 15));
-		btnModificar.setBounds(947, 590, 100, 23);
+		btnModificar.setBounds(469, 567, 100, 23);
+		btnModificar.setVisible(false);
 		jpconexion.add(btnModificar);
 
 		rdbtnDesarrollo = new JRadioButton("Desarrollo");

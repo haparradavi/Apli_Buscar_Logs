@@ -4,7 +4,9 @@ import java.io.IOException;
 
 import com.ConectionSSH.ConexionSSH;
 import com.Globales.Globalvar;
+import com.Pruebas.ProbarBuscarSyslog;
 import com.jcraft.jsch.JSchException;
+import com.procesarlogs.BuscarErrorSyslog;
 import com.procesarlogs.ParametrosLogsDAO;
 
 public class PBusquedaRapida {
@@ -40,12 +42,14 @@ public class PBusquedaRapida {
 					if(parametrosLogsDAO.getAmbienteFabrica()==1) {
 						String[] parts = lineService.split(",");
 						parametrosLogsDAO.setIdtransaccion(parts[1]);
+						parametrosLogsDAO.setFechaInicio(parts[3].substring(0,19));
 					}else {
 						String linea=conexionSSH.eliminarrutalog(lineService);
 						parametrosLogsDAO =  mstringAXml.stringAXml(linea,parametrosLogsDAO);
 //						parametrosLogsDAO =  mstringAXml.stringAXml(lineService,parametrosLogsDAO);
 					}
-
+					
+				
 					long start = System.currentTimeMillis();
 					long end = start + 74*1000; // 60 seconds * 1000 ms/sec
 					while (System.currentTimeMillis() < end){

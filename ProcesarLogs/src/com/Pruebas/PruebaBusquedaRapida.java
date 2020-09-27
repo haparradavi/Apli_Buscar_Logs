@@ -29,10 +29,10 @@ public class PruebaBusquedaRapida {
 		try {
 			System.out.println("Entra");
 			conecAmb.conexion(1);
-			parametrosLogsDAO.setAmbienteFabrica(2);	
+			parametrosLogsDAO.setAmbienteFabrica(1);	
 			
-		    parametrosLogsDAO.setNombreServicio("NovedadAgendamiento");
-			parametrosLogsDAO.setFechatransaccion("2020-09-23T17:18:41");
+		    parametrosLogsDAO.setNombreServicio("AutenticacionComisionistas");
+			parametrosLogsDAO.setFechatransaccion("2020-09-26T16:24:43");
 //			
 //			parametrosLogsDAO.setIdtransaccion("c0de33e8fa2111eaafc55a0405110000c0de34d8fa2111ea");
 //			parametrosLogsDAO.setIdtransaccion("2020-09-18T21:26");

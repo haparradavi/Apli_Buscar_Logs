@@ -34,7 +34,7 @@ public class StringAXml {
 				paramLog.setCanal(element.getElementsByTagName("systemId").item(0).getTextContent());
 				paramLog.setIdtransaccion(element.getElementsByTagName("messageId").item(0).getTextContent());
 				paramLog.setAdaptador(element.getElementsByTagName("componentId").item(0).getTextContent());
-				paramLog.setFechaInicio(element.getElementsByTagName("timeStamp").item(0).getTextContent());
+				paramLog.setFechaInicio((element.getElementsByTagName("timeStamp").item(0).getTextContent()).substring(0,19));
 				paramLog.setNombreServicio(element.getElementsByTagName("serviceId").item(0).getTextContent());
 			}
 			 			
