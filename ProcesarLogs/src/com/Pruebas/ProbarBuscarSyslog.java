@@ -21,7 +21,7 @@ public class ProbarBuscarSyslog {
 		String fecha= "2020-09-26T15:52:03";
 		ParametrosLogsDAO parametrosLogsDAO = new  ParametrosLogsDAO ();
 		try {
-
+			System.out.println("llamdos");
 			
 			parametrosLogsDAO.setFechaInicio("2020-09-26T15:52:03");
 			parametrosLogsDAO=buscarsyslog.procesarSyslog(parametrosLogsDAO);

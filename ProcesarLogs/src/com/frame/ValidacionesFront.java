@@ -38,6 +38,7 @@ public class ValidacionesFront {
 						case 3:
 							PBusquedaRapida persisBusqueda= new PBusquedaRapida();
 							parametrosLogsDAO1 =persisBusqueda.PersistencePBusquedaRapida(parametrosLogsDAO);
+							break;	
 						case 4:
 							BuscarErrorSyslog buscarsyslog = new BuscarErrorSyslog();
 							parametrosLogsDAO1=buscarsyslog.procesarSyslog(parametrosLogsDAO);

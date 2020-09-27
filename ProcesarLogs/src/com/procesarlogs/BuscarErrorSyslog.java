@@ -27,7 +27,6 @@ public class BuscarErrorSyslog {
 		
 		ConexionSSH conexionSSH = new ConexionSSH();
 		try {
-			
 			fechaentrada = parametrosLogsDAO.getFechaInicio().replaceAll("T", " ");
 			segundosProceso=parametrosLogsDAO.getSegundosProceso();
 			segundosProceso=segundosProceso+3;

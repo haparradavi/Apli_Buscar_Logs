@@ -232,12 +232,10 @@ public class JPBusqueda extends JFrame implements ActionListener {
 		
 		if (e.getSource() == rdbtnIBM) {
 			parametrosLogsDAO.setAmbienteFabrica(1);
-			System.out.println("vaos1");
 		}
 		
 		if (e.getSource() == rdbtnTcs) {			
 			parametrosLogsDAO.setAmbienteFabrica(2);
-			System.out.println("vaos2");
 		}
 		
 		if (e.getSource() == btnBuscar) {	
@@ -267,16 +265,15 @@ public class JPBusqueda extends JFrame implements ActionListener {
 				System.out.println(" Nombre Log: "+parametrosLogsDAO.getNameLogcommand());
 				System.out.println("Ruta Error: "+parametrosLogsDAO.getRutaErrorlog());
 				System.out.println(" Nombre Log Error: "+parametrosLogsDAO.getNameErrorcommand());
-				
 				if(!ValidacionesFront.procesoespera(3, 0,parametrosLogsDAO)) {
-				
+					
 //					parametrosLogsDAO =persisBusqueda.PersistencePBusquedaRapida(parametrosLogsDAO);
 					parametrosLogsDAO=ValidacionesFront.parametrosLogsDAO1;
 					parametrosLogsDAO = validacionnull(parametrosLogsDAO);
 					
 					textAreaLogs.setText(parametrosLogsDAO.getResultBusquedaLog());
 					textAreaError.setText(parametrosLogsDAO.getResultBusquedaError());
-					textIdTransaccion.setText(parametrosLogsDAO.getIdtransaccion());
+					textIdTransaccion.setText(parametrosLogsDAO.getIdtransaccion());				
 					textFechaSyslog.setText(parametrosLogsDAO.getFechaInicio());
 //					
 //					System.out.println("result log: "+parametrosLogsDAO.getResultBusquedaLog());
@@ -299,7 +296,7 @@ public class JPBusqueda extends JFrame implements ActionListener {
 	private void evaluarBuscarSyslog() {
 		
 		try {
-			if(validarAntesprocesoSyslog()) {			
+			if(validarAntesprocesoSyslog()) {	
 				textAreaSyslog.setText("");	
 				parametrosLogsDAO.setFechaInicio(textFechaSyslog.getText().toString());
 				parametrosLogsDAO.setSegundosProceso(Integer.valueOf(textSegundos.getText()));
