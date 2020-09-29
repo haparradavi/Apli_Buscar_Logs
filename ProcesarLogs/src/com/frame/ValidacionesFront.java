@@ -5,6 +5,7 @@ import javax.swing.JOptionPane;
 
 import com.ConectionSSH.ConexionAmbiente;
 import com.Persistence.PBusquedaRapida;
+import com.Properties.Constantes;
 import com.procesarlogs.BuscarErrorSyslog;
 import com.procesarlogs.ParametrosLogsDAO;
 
@@ -18,15 +19,14 @@ public class ValidacionesFront {
 	public static boolean procesoespera(int metodoEjecucion,int ambiente,ParametrosLogsDAO parametrosLogsDAO) throws Exception{
 		errorprocesoespera=false;
 		parametrosLogsDAO1 =new ParametrosLogsDAO();
-		JOptionPane msg= Mensajes.mensajeInformativoParametrico("Se esta ejecutando el proceso por favor espere");
+		JOptionPane msg= Mensajes.mensajeInformativoParametrico(Constantes.MsgProcesoEspera);
 		try {
-			final JDialog dlg = msg.createDialog("Procesando...");
+			final JDialog dlg = msg.createDialog(Constantes.MsgTituloDialog);
 			dlg.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 			dlg.disable();
 			new Thread(new Runnable() {
 				public void run(){
 					try {
-	//					Thread.sleep(5000);
 						switch (metodoEjecucion) {
 						case 1:
 					//		procesoTimer ();
@@ -51,7 +51,6 @@ public class ValidacionesFront {
 					} catch (Exception e) {
 						errorprocesoespera=true;
 						Mensajes.mensajeError("ValidacionesFront: "+e.getMessage());
-						System.out.println("aqui hubo error");
 					}
 					dlg.setVisible(false);
 				}

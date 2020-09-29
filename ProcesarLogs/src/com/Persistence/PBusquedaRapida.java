@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import com.ConectionSSH.ConexionSSH;
 import com.Globales.Globalvar;
+import com.Properties.Constantes;
 import com.Pruebas.ProbarBuscarSyslog;
 import com.jcraft.jsch.JSchException;
 import com.procesarlogs.BuscarErrorSyslog;
@@ -68,8 +69,8 @@ public class PBusquedaRapida {
 	
 				}else {
 					System.out.println("Servicio no encontrado ");
-					trazaLog="Servicio no encontrado, buscar con la fecha de la transaccion en el campo IdTransaccion";
-					errortraza="No se proceso el archivo de error debido a que no de encontro informacion del servicio";
+					trazaLog=Constantes.MsgservicioNoencontradoTraza;
+					errortraza=Constantes.MsgservicionoencontradoError;
 				}
 			
 			}

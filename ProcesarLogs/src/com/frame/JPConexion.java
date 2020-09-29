@@ -14,6 +14,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import com.ProcesarProperties.LeerArchivoProperties;
 import com.ProcesarProperties.PropertiesDao;
+import com.Properties.Constantes;
 import com.procesarlogs.ParametrosLogsDAO;
 
 
@@ -225,13 +226,13 @@ public class JPConexion extends JPanel implements ActionListener {
 		if (e.getSource() == btnConectar) {
 //			 InicioBuscarLogs.jpBusqueda.recibirAmbienteConexion(tipoAmbiente); 
 			if(tipoAmbiente==0)
-				Mensajes.mensajeError("Debe seleccionar un ambiente para conectarse.");
+				Mensajes.mensajeError(Constantes.Msgselecionarambienteconexion);
 			else {
 				if(conexionambiente(tipoAmbiente)) {
-		        	  Mensajes.mensajeError("No se puedo establecer conexión");
+		        	  Mensajes.mensajeError(Constantes.MsgConexionIncorrecta);
 //		        	  tipoAmbiente=0;
 				} else {
-		        	  Mensajes.mensajeInformativo("Conexión Exitosa");
+		        	  Mensajes.mensajeInformativo(Constantes.MsgConexionExitosa);
 		        	  InicioBuscarLogs.jpBusqueda.recibirAmbienteConexion(tipoAmbiente); 
 		          }  
 			}
@@ -356,7 +357,7 @@ public class JPConexion extends JPanel implements ActionListener {
         	  validaconexionambiente=true;
         	  
 		} catch (Exception e) {
-			System.out.println("conexionambiente "+e.getMessage());
+//			System.out.println("conexionambiente "+e.getMessage());
 			Mensajes.mensajeError("conexionambiente: "+e.getMessage());
 		}
 		return validaconexionambiente;

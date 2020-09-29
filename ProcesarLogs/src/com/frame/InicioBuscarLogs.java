@@ -10,6 +10,7 @@ import java.awt.BorderLayout;
 import javax.swing.UIManager;
 
 import com.Globales.Globalvar;
+import com.Properties.Constantes;
 import com.jtattoo.plaf.acryl.AcrylLookAndFeel;
 
 import javax.swing.ImageIcon;
@@ -56,9 +57,9 @@ public class InicioBuscarLogs {
 	private void initialize() {
 
 		frmBusquedaLogs = new JFrame();
-		frmBusquedaLogs.setTitle("Aplicacion Busqueda Logs");
+		frmBusquedaLogs.setTitle(Constantes.nameAplicacion);
 		frmBusquedaLogs.setBounds(100, 100, 1200, 897);
-		frmBusquedaLogs.setIconImage(new ImageIcon(getClass().getResource("/com/Images/logo6.png")).getImage());
+		frmBusquedaLogs.setIconImage(new ImageIcon(getClass().getResource(Constantes.rutaicono)).getImage());
 		frmBusquedaLogs.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmBusquedaLogs.setLocationRelativeTo(null);
 //		frmBusquedaLogs.setResizable(false);

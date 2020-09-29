@@ -207,7 +207,6 @@ public class JPBusqueda extends JFrame implements ActionListener {
 	}
 	
 	public  void recibirAmbienteConexion (int ambienteconexion) {
-		System.out.println("llego al panel bisqueda dato: "+ambienteconexion);
 		tipoAmbiente=ambienteconexion;
 		
 //		JPanel jpbusquedarapida = new JPanel();
@@ -281,7 +280,7 @@ public class JPBusqueda extends JFrame implements ActionListener {
 //					System.out.println("result idtransaccion "+parametrosLogsDAO.getIdtransaccion());
 					
 				}else
-					Mensajes.mensajeError("Error al generar la busqueda de la traza");
+					Mensajes.mensajeError(Constantes.MsgBusquedaTraza);
 			}
 		} catch (Exception e) {
 			
@@ -303,12 +302,12 @@ public class JPBusqueda extends JFrame implements ActionListener {
 				if(!ValidacionesFront.procesoespera(4, 0,parametrosLogsDAO)) {
 					parametrosLogsDAO=ValidacionesFront.parametrosLogsDAO1;
 					if(parametrosLogsDAO.getResultErrorSyslog()== null || parametrosLogsDAO.getResultErrorSyslog().toString() .isEmpty()) {
-						textAreaSyslog.setText("No se encontro información en el syslog");	
+						textAreaSyslog.setText(Constantes.MsgNofoundSyslog);	
 					}else {
 						textAreaSyslog.setText(parametrosLogsDAO.getResultErrorSyslog().toString());
 					}						
 				}else
-					Mensajes.mensajeError("Error al generar la busqueda de la traza");
+					Mensajes.mensajeError(Constantes.MsgBusquedaTraza);
 	
 			}
 			
@@ -377,11 +376,11 @@ public class JPBusqueda extends JFrame implements ActionListener {
 	public boolean validarAntesproceso() {
 		boolean validacion =false;
 		if(tipoAmbiente==0) {
-			Mensajes.mensajeError("Debe generar conexión con alguno de los 3 ambientes para realizar el proceso.");
+			Mensajes.mensajeError(Constantes.MsgConexionAmbientes);
 		}else if(parametrosLogsDAO.getAmbienteFabrica()==0) {
-			Mensajes.mensajeError("Debe seleccionar una fabrica para buscar la traza en los logs.");
+			Mensajes.mensajeError(Constantes.MsgSeleccionFabrica);
 		}else if(Validarnuloscampos()) {
-			Mensajes.mensajeError("Debe ingresar al menos un criterio de busqueda");
+			Mensajes.mensajeError(Constantes.MsgCriterioBusqueda);
 		}else {
 			validacion =true;
 		}
@@ -392,11 +391,11 @@ public class JPBusqueda extends JFrame implements ActionListener {
 	public boolean validarAntesprocesoSyslog() {
 		boolean validacion =false;
 		if(tipoAmbiente==0) {
-			Mensajes.mensajeError("Debe generar conexión con alguno de los 3 ambientes para realizar el proceso.");
+			Mensajes.mensajeError(Constantes.MsgConexionAmbientes);
 		}else if(parametrosLogsDAO.getAmbienteFabrica()==0) {
-			Mensajes.mensajeError("Debe seleccionar una fabrica para buscar la traza en los logs.");
+			Mensajes.mensajeError(Constantes.MsgSeleccionFabrica);
 		}else if(Validarnulossyslog()) {
-			Mensajes.mensajeError("Debe ingresar al menos un criterio de busqueda");
+			Mensajes.mensajeError(Constantes.MsgCriterioBusqueda);
 		}else {
 			validacion =true;
 		}
