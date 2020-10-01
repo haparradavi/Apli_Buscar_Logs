@@ -183,7 +183,7 @@ public class ConexionSSH {
 	
 	public  String validafintagerror (String linea, String filepatherror) throws Exception{
 		
-		String nuevatraza="";
+		String traza="";
 		try {
 			String result="";
 			int numerolinea=0;
@@ -191,14 +191,14 @@ public class ConexionSSH {
 			if(linea != null && !linea .isEmpty()) {
 				String[] parts = linea.split("\n");
 				for (int i = 0; i < parts.length; i++) {
-					nuevatraza= nuevatraza.concat(parts[i]);
+					traza= traza.concat(parts[i]);
 					if(!parts[i].contains("</error>")) {
 						String [] lineapart = parts[i].split(":");
 						numerolinea = Integer.valueOf(lineapart[0]);
 						while(faltandatos) {
 							numerolinea=numerolinea+1;
 							result=execCommanLinux("sed '"+numerolinea+"q;d' "+filepatherror);		
-							nuevatraza= nuevatraza.concat(result).concat("\n");
+							traza= traza.concat(result).concat("\n");
 							if(result.contains("</error>")) {
 								faltandatos=false;
 							}
@@ -212,29 +212,29 @@ public class ConexionSSH {
 			throw e;
 		}
 
-		return nuevatraza;	
+		return traza;	
 	}
 	
 	public  String eliminarTagsTCS (String traza) throws Exception{
 		
-		String nuevatraza="";
+
 		try {
 			if(traza != null && !traza .isEmpty() && traza.contains("<Log><systemId>")) {
-				nuevatraza=traza.replaceAll("<Log><systemId>", "");
-				nuevatraza=nuevatraza.replaceAll("</systemId><messageId>", ", ");
-				nuevatraza=nuevatraza.replaceAll("</messageId><componentId>", ", ");
-				nuevatraza=nuevatraza.replaceAll("</componentId><timeStamp>", ", ");
-				nuevatraza=nuevatraza.replaceAll("</timeStamp><serviceId>", ", ");
-				nuevatraza=nuevatraza.replaceAll("</serviceId><commHeader>", ", ");
-				nuevatraza=nuevatraza.replaceAll("</commHeader><dataHeader>", ", ");
-				nuevatraza=nuevatraza.replaceAll("</dataHeader></Log>", "");
+				traza=traza.replaceAll("<Log><systemId>", "");
+				traza=traza.replaceAll("</systemId><messageId>", ", ");
+				traza=traza.replaceAll("</messageId><componentId>", ", ");
+				traza=traza.replaceAll("</componentId><timeStamp>", ", ");
+				traza=traza.replaceAll("</timeStamp><serviceId>", ", ");
+				traza=traza.replaceAll("</serviceId><commHeader>", ", ");
+				traza=traza.replaceAll("</commHeader><dataHeader>", ", ");
+				traza=traza.replaceAll("</dataHeader></Log>", "");
 			}
 		} catch (Exception e) {
 			System.out.println("eliminarTagsTCS"+e.getMessage());
 			throw e;
 		}
 
-		return nuevatraza;	
+		return traza;	
 	}
 	
 	
