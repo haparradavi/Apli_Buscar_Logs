@@ -34,12 +34,18 @@ public class BuscarErrorSyslog {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			cal.setTime(sdf.parse(fechaentrada));
 			cal.add(Calendar.SECOND, -3);
-			fehcaFormatmin = String.format("%1$tb %1$td %1$tH:%1$tM:%1$tS", cal).toUpperCase();
+			String dia=String.format("%1$td", cal);
+			if(dia.substring(0,1).equals("0")) {
+				dia =dia.replace("0", " ");
+			}
+			fehcaFormatmin = String.format("%1$tb "+dia+" %1$tH:%1$tM:%1$tS", cal).toUpperCase();
 			mes =String.format("%1$tb", cal).toUpperCase();
 			System.out.println("mes: "+mes);
 			System.out.println("La fecha min log: " + fehcaFormatmin);
 			cal.add(Calendar.SECOND,segundosProceso);
-			fehcaFormatmax = String.format("%1$tb %1$td %1$tH:%1$tM:%1$tS", cal).toUpperCase();
+			
+			System.out.println("dia: "+dia);
+			fehcaFormatmax = String.format("%1$tb "+dia+" %1$tH:%1$tM:%1$tS", cal).toUpperCase();
 			System.out.println("La fecha max log: " + fehcaFormatmax);
 			
 			fechasinSegundos= fehcaFormatmin.substring(0,fehcaFormatmin.length()-2);
