@@ -76,6 +76,7 @@ public class PBusquedaRapida {
 			}
 			/*Para el front devuelve el reultado de log y el error y por consiguiente el idtransaccion*/
 			trazaLog=conexionSSH.eliminarrutalog(trazaLog);
+			trazaLog=conexionSSH.eliminarTagsTCS(trazaLog);   // se utiliza para eliminar los tags de TCS
 			parametrosLogsDAO.setResultBusquedaLog(trazaLog);
 			parametrosLogsDAO.setResultBusquedaError(errortraza);
 //			Globalvar.sessionGlobal.disconnect();

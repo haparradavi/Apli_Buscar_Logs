@@ -215,6 +215,28 @@ public class ConexionSSH {
 		return nuevatraza;	
 	}
 	
+	public  String eliminarTagsTCS (String traza) throws Exception{
+		
+		String nuevatraza="";
+		try {
+			if(traza != null && !traza .isEmpty() && traza.contains("<Log><systemId>")) {
+				nuevatraza=traza.replaceAll("<Log><systemId>", "");
+				nuevatraza=nuevatraza.replaceAll("</systemId><messageId>", ", ");
+				nuevatraza=nuevatraza.replaceAll("</messageId><componentId>", ", ");
+				nuevatraza=nuevatraza.replaceAll("</componentId><timeStamp>", ", ");
+				nuevatraza=nuevatraza.replaceAll("</timeStamp><serviceId>", ", ");
+				nuevatraza=nuevatraza.replaceAll("</serviceId><commHeader>", ", ");
+				nuevatraza=nuevatraza.replaceAll("</commHeader><dataHeader>", ", ");
+				nuevatraza=nuevatraza.replaceAll("</dataHeader></Log>", "");
+			}
+		} catch (Exception e) {
+			System.out.println("eliminarTagsTCS"+e.getMessage());
+			throw e;
+		}
+
+		return nuevatraza;	
+	}
+	
 	
 
 }
